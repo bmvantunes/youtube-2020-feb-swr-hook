@@ -1,0 +1,20 @@
+{
+  "comments": [
+    {
+      "id": 1,
+      "comment": "First Server Comment"
+    },
+    {
+      "id": 2,
+      "comment": "Second Server Comment"
+    },
+    {
+      "id": 3,
+      "comment": "Third Server Comment"
+    },
+    {
+      "id": 4,
+      "comment": "Fourth Server Comment"
+    }
+  ]
+}
