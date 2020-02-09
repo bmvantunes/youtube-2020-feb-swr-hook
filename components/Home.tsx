@@ -1,15 +1,13 @@
 import { Box, Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
+import axios from 'axios';
 import React from 'react';
+import useSWR, { mutate, trigger } from 'swr';
 import { AddComment } from './AddComment';
 
-const data = [
-  { comment: 'This is the first comment', id: 1 },
-  { comment: 'This is the second comment', id: 2 },
-  { comment: 'This is the third comment', id: 3 }
-];
-
-export function Home() {
+export function Home({commentsFromServer } :any) {
+  const {data} = useSWR('/comments', { initialData: commentsFromServer});
+  
   return (
     <React.Fragment>
       <Box marginBottom={2}>
@@ -26,7 +24,7 @@ export function Home() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.map(row => (
+            {data?.map(row => (
               <TableRow key={row.comment}>
                 <TableCell component="th" scope="row">
                   {row.id}
@@ -37,6 +35,13 @@ export function Home() {
                     variant="contained"
                     color="secondary"
                     startIcon={<DeleteIcon />}
+                    onClick={async () => {
+                      const deleteUrl = '/comments/'+row.id;
+                      const url = '/comments';
+                      mutate(url, data.filter(c => c.id !== row.id), false);
+                      await axios.delete(deleteUrl);
+                      trigger(url);
+                    }}
                   >
                     Delete
                   </Button>
@@ -48,4 +53,11 @@ export function Home() {
       </TableContainer>
     </React.Fragment>
   );
+}
+
+
+Home.getInitialProps = async ctx => {
+  const res = await axios('/comments')
+  const json = res.data
+  return { commentsFromServer: json }
 }

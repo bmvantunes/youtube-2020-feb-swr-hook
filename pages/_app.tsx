@@ -1,10 +1,14 @@
 import { Box, Container, CssBaseline } from '@material-ui/core';
 import red from '@material-ui/core/colors/red';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import axios from 'axios';
 import App from 'next/app';
 import Head from 'next/head';
 import React from 'react';
+import { SWRConfig } from 'swr';
 import { Nav } from '../components/Nav';
+
+axios.defaults.baseURL = 'http://localhost:4001';
 
 // Create a theme instance.
 export const theme = createMuiTheme({
@@ -46,11 +50,15 @@ export default class MyApp extends App {
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
           <Nav />
-          <Container maxWidth={false}>
-            <Box marginTop={2}>
-              <Component {...pageProps} />
-            </Box>
-          </Container>
+          <SWRConfig
+            value={{ fetcher: (url: string) => axios(url).then(r => r.data) }}
+          >
+            <Container maxWidth={false}>
+              <Box marginTop={2}>
+                <Component {...pageProps} />
+              </Box>
+            </Container>
+          </SWRConfig>
         </ThemeProvider>
       </React.Fragment>
     );
