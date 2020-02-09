@@ -35,10 +35,10 @@ export function Nav() {
         </Button>
 
         <Button color="inherit">
-          <Link href="/just-another-page">
+          <Link href="/add-comment">
             <a style={{ color: 'white' }}>
               <Typography  color="inherit">
-                Other Page
+                Add Comment
               </Typography>
             </a>
           </Link>
