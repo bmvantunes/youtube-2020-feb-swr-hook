@@ -1,12 +1,49 @@
+import { AppBar, Button, makeStyles, Toolbar, Typography } from '@material-ui/core';
 import Link from 'next/link';
 import React from 'react';
 
-export default function Nav() {
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1
+  },
+  menuButton: {
+    marginRight: theme.spacing(2)
+  },
+  title: {
+    flexGrow: 1
+  }
+}));
+
+export function Nav() {
+  const classes = useStyles();
+
   return (
-    <nav>
-      <Link href="/">
-        <a>Home</a>
-      </Link>
-    </nav>
+    <AppBar position="static">
+      <Toolbar variant="dense">
+        <Typography variant="h6" className={classes.title}>
+          Comments App
+        </Typography>
+
+        <Button color="inherit">
+          <Link href="/">
+            <a style={{ color: 'white' }}>
+              <Typography  color="inherit">
+                Home
+              </Typography>
+            </a>
+          </Link>
+        </Button>
+
+        <Button color="inherit">
+          <Link href="/just-another-page">
+            <a style={{ color: 'white' }}>
+              <Typography  color="inherit">
+                Other Page
+              </Typography>
+            </a>
+          </Link>
+        </Button>
+      </Toolbar>
+    </AppBar>
   );
 }

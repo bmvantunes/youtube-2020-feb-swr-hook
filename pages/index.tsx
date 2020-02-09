@@ -1,10 +1,4 @@
-import React from 'react';
-import Nav from '../components/nav';
+import { Home } from '../components/Home';
 
-export default function Home() {
-  return (
-    <React.Fragment>
-      <Nav />
-    </React.Fragment>
-  );
-}
+export default Home ;
+
