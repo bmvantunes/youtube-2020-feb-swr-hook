@@ -21,7 +21,7 @@ export function Nav() {
     <AppBar position="static">
       <Toolbar variant="dense">
         <Typography variant="h6" className={classes.title}>
-          Comments App
+          My Jira Ticket
         </Typography>
 
         <Button color="inherit">
